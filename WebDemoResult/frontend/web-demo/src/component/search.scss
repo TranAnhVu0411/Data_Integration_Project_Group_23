@@ -1,0 +1,62 @@
+.tabSearch {
+    width: 70vw;
+    margin: auto;
+    .titleSearch {
+        font-weight: 700;
+        font-size: 18px;
+    }
+    .searchInfo {
+        display: flex;
+        .titleMovie{
+            width: 60%;
+        }
+        align-items: center;
+    }
+}
+.list-movie {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 70vw;
+    margin: auto;
+    .cardContainer {
+        text-decoration: none;
+        .cardBody {
+            border: 1px solid rgba(0, 0, 0, 0);
+            border-radius: 4px;
+            height: 100%;
+            .productImage {
+                position: relative;
+                text-align: center;
+                width: 90%;
+                min-height: 250px;
+                margin: auto;
+                img {
+                  position: absolute; /* Take your picture out of the flow */
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0; /* Make the picture taking the size of it's parent */
+                  width: 100%; /* This if for the object-fit */
+                  height: 100%; /* This if for the object-fit */
+                  object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+                  object-position: center;
+                }
+            }
+            .cardContent {
+                padding: 12px;
+                .cardHeader {
+                    margin-bottom: 15px;
+                    .cardTitle {
+                        font-size: 16px;
+                        padding: 12px 0px;
+                        margin: 0px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+    }
+    .pagination {
+    
+    }
+}

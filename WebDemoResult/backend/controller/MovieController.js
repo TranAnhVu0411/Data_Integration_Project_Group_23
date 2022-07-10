@@ -4,6 +4,8 @@ const MovielenModel = require("../model/Movielen")
 const TomatoModel = require("../model/RottenTomato")
 const TmdbModel = require("../model/TmdbModel")
 const httpStatus = require("../utils/httpStatus");
+const MetacriticReviewModel = require("../model/MetacriticReview");
+const TomatoReviewModel = require("../model/tomatoReview");
 
 const movieController = {};
 
@@ -20,7 +22,10 @@ movieController.getMovieInfo = async (req, res, next) => {
         let metacriticRate = await MetacriticModel.find({movie_id: result.movie_id});
         movielenRate = await MovielenModel.find({movie_id: result.movie_id});
         tmdbRate = await TmdbModel.find({movie_id: result.movie_id});
-        let tomatoRate = await TomatoModel.find({movie_id: result.movie_id})
+        let tomatoRate = await TomatoModel.find({movie_id: result.movie_id});
+
+        let metacritic_review = await MetacriticReviewModel.find({movie_id: result.movie_id}).limit(100);
+        let tomato_review = await TomatoReviewModel.find({movie_id: result.movie_id}).limit(100);
 
         res.status(200).json({
             code: 200,
@@ -30,7 +35,9 @@ movieController.getMovieInfo = async (req, res, next) => {
                 metacriticRate: metacriticRate,
                 movielenRate: movielenRate,
                 tmdbRate: tmdbRate,
-                tomatoRate: tomatoRate
+                tomatoRate: tomatoRate,
+                review: metacritic_review,
+                tomato_review: tomato_review
             }
         });
 
@@ -49,7 +56,6 @@ movieController.getList = async (req, res, next) => {
         let result = await MovieModel.find({})
         .skip(pages > 0 ? ( ( pages - 1 ) * 20) : 0).limit(20);
         let count = await MovieModel.find({}).count();
-
         res.status(200).json({
             code: 200,
             message: "Get list thành công",
